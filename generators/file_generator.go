@@ -92,21 +92,25 @@ func (g *fileGenerator) generateFile() {
 
 func (g *fileGenerator) generateFields(message *protogen.Message, prefix string, wrapCount int) {
 	currLevelWrapCount := wrapCount
-	nextLevelWrapCount := currLevelWrapCount
 	for _, f := range message.Fields {
 		fieldName := prefix + f.GoName
 
-		if f.Desc.IsList() {
-			nextLevelWrapCount = currLevelWrapCount + 1
-		}
-
 		if f.Desc.Kind() == protoreflect.MessageKind {
-			g.generateFields(f.Message, fieldName+"_", nextLevelWrapCount)
+			if f.Desc.IsList() {
+				g.generateFields(f.Message, fieldName+"_", currLevelWrapCount+1)
+				continue
+			}
+			g.generateFields(f.Message, fieldName+"_", currLevelWrapCount)
 			continue
 		}
 
+		wc := currLevelWrapCount
+		if f.Desc.IsList() {
+			wc++
+		}
+
 		fType := protoToClickhouse[f.Desc.Kind().String()]
-		for i := 0; i < nextLevelWrapCount; i++ {
+		for i := 0; i < wc; i++ {
 			fType = fmt.Sprintf(arrayTypeTemplate, fType)
 		}
 
