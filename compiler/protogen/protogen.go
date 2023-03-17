@@ -118,9 +118,10 @@ type Plugin struct {
 	opts           Options
 	err            error
 
-	TemplatePath  string
-	DBName        string
-	MessageSuffix string
+	TemplatePath   string
+	DBName         string
+	MessageSuffix  string
+	TemplateSuffix string
 }
 
 type Options struct {
@@ -198,6 +199,8 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 			}
 		case "template_path":
 			gen.TemplatePath = value
+		case "template_suffix":
+			gen.TemplateSuffix = value
 		case "message_suffix":
 			gen.MessageSuffix = value
 		case "db":

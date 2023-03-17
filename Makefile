@@ -9,6 +9,7 @@ compile:
 	--sql_out=./examples/sql \
 	--sql_opt=paths=source_relative \
 	--sql_opt=template_path=examples/templates/create_table.sql \
+	--sql_opt=template_suffix=Null \
 	--sql_opt=message_suffix=Message \
 	--sql_opt=db='$${CLICKHOUSE_RT_DATABASE}' \
 	tables.proto

@@ -11,7 +11,7 @@ import (
 )
 
 const sqlField = "%s\t%s"
-const arrayType = "array(%s)"
+const arrayTypeTemplate = arrayType + "(%s)"
 const columnWidth = 45
 
 type fileGenerator struct {
@@ -33,6 +33,7 @@ type templateData struct {
 	Database string
 	Table    string
 	Fields   string
+	Suffix   string
 }
 
 func GenerateFileForMessage(gen *protogen.Plugin, m *protogen.Message) {
@@ -79,6 +80,7 @@ func (g *fileGenerator) generateFile() {
 		Database: g.gen.DBName,
 		Table:    tableName(g.message.GoIdent.GoName, g.gen.MessageSuffix),
 		Fields:   fieldsBuilder.String(),
+		Suffix:   g.gen.TemplateSuffix,
 	}
 
 	err := g.template.Execute(g.gf, td)
@@ -105,7 +107,7 @@ func (g *fileGenerator) generateFields(message *protogen.Message, prefix string,
 
 		fType := protoToClickhouse[f.Desc.Kind().String()]
 		for i := 0; i < nextLevelWrapCount; i++ {
-			fType = fmt.Sprintf(arrayType, fType)
+			fType = fmt.Sprintf(arrayTypeTemplate, fType)
 		}
 
 		g.fieldsSl = append(g.fieldsSl, field{

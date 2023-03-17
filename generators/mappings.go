@@ -1,5 +1,7 @@
 package generators
 
+const arrayType = "Array"
+
 var protoToClickhouse = map[string]string{
 	"double":   "Float64",
 	"float":    "Float32",

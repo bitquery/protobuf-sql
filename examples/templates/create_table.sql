@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS {{.Database}}.{{.Table}}
 
     {{.Fields}}
 
-    );
+    ) {{.Suffix}};
