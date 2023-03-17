@@ -63,7 +63,7 @@ func (g *fileGenerator) generateFile() {
 	fileName := fileName(g.message.GoIdent.GoName, g.gen.MessageSuffix)
 	g.gf = g.gen.NewGeneratedFile(fileName, "")
 
-	g.generateFields(g.message, "")
+	g.generateFields(g.message, "", 0)
 
 	var fieldsBuilder strings.Builder
 	for i, f := range g.fieldsSl {
@@ -88,21 +88,23 @@ func (g *fileGenerator) generateFile() {
 	}
 }
 
-func (g *fileGenerator) generateFields(message *protogen.Message, prefix string) {
+func (g *fileGenerator) generateFields(message *protogen.Message, prefix string, wrapCount int) {
+	currLevelWrapCount := wrapCount
+	nextLevelWrapCount := currLevelWrapCount
 	for _, f := range message.Fields {
 		fieldName := prefix + f.GoName
 
-		if f.Desc.Kind() == protoreflect.MessageKind {
-			if f.Desc.IsList() {
-				g.gen.Error(fmt.Errorf("list of messages is not supported"))
-			}
-			g.generateFields(f.Message, fieldName+"_")
+		if f.Desc.IsList() {
+			nextLevelWrapCount = currLevelWrapCount + 1
+		}
 
+		if f.Desc.Kind() == protoreflect.MessageKind {
+			g.generateFields(f.Message, fieldName+"_", nextLevelWrapCount)
 			continue
 		}
 
 		fType := protoToClickhouse[f.Desc.Kind().String()]
-		if f.Desc.IsList() {
+		for i := 0; i < nextLevelWrapCount; i++ {
 			fType = fmt.Sprintf(arrayType, fType)
 		}
 
