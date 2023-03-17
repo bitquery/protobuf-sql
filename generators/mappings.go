@@ -18,4 +18,5 @@ var protoToClickhouse = map[string]string{
 	"string":   "String",
 	"bool":     "UInt8",
 	"bytes":    "String",
+	"enum":     "UInt8",
 }
