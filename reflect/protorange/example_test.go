@@ -9,17 +9,17 @@ import (
 	"strings"
 	"time"
 
-	"google.golang.org/protobuf/encoding/protojson"
-	"google.golang.org/protobuf/internal/detrand"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protopath"
-	"google.golang.org/protobuf/reflect/protorange"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/testing/protopack"
-	"google.golang.org/protobuf/types/known/anypb"
-	"google.golang.org/protobuf/types/known/timestamppb"
+	"github.com/bitquery/protobuf-sql/encoding/protojson"
+	"github.com/bitquery/protobuf-sql/internal/detrand"
+	"github.com/bitquery/protobuf-sql/proto"
+	"github.com/bitquery/protobuf-sql/reflect/protopath"
+	"github.com/bitquery/protobuf-sql/reflect/protorange"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/testing/protopack"
+	"github.com/bitquery/protobuf-sql/types/known/anypb"
+	"github.com/bitquery/protobuf-sql/types/known/timestamppb"
 
-	newspb "google.golang.org/protobuf/internal/testprotos/news"
+	newspb "github.com/bitquery/protobuf-sql/internal/testprotos/news"
 )
 
 func init() {

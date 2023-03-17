@@ -7,16 +7,16 @@ package proto_test
 import (
 	"reflect"
 
-	"google.golang.org/protobuf/encoding/prototext"
-	"google.golang.org/protobuf/internal/filedesc"
-	"google.golang.org/protobuf/internal/flags"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protodesc"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/runtime/protoimpl"
-	"google.golang.org/protobuf/testing/protopack"
+	"github.com/bitquery/protobuf-sql/encoding/prototext"
+	"github.com/bitquery/protobuf-sql/internal/filedesc"
+	"github.com/bitquery/protobuf-sql/internal/flags"
+	"github.com/bitquery/protobuf-sql/proto"
+	"github.com/bitquery/protobuf-sql/reflect/protodesc"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/runtime/protoimpl"
+	"github.com/bitquery/protobuf-sql/testing/protopack"
 
-	"google.golang.org/protobuf/types/descriptorpb"
+	"github.com/bitquery/protobuf-sql/types/descriptorpb"
 )
 
 func init() {

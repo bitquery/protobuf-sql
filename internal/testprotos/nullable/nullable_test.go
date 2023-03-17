@@ -8,11 +8,11 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/bitquery/protobuf-sql/proto"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/runtime/protoimpl"
+	"github.com/bitquery/protobuf-sql/testing/protocmp"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/runtime/protoimpl"
-	"google.golang.org/protobuf/testing/protocmp"
 )
 
 func Test(t *testing.T) {
@@ -23,7 +23,7 @@ func Test(t *testing.T) {
 		t.Run(string(mt.Descriptor().FullName()), func(t *testing.T) {
 			testEmptyMessage(t, mt.Zero(), false)
 			testEmptyMessage(t, mt.New(), true)
-			//testMethods(t, mt)
+			// testMethods(t, mt)
 		})
 	}
 }

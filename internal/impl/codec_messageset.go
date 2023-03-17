@@ -7,10 +7,10 @@ package impl
 import (
 	"sort"
 
-	"google.golang.org/protobuf/encoding/protowire"
-	"google.golang.org/protobuf/internal/encoding/messageset"
-	"google.golang.org/protobuf/internal/errors"
-	"google.golang.org/protobuf/internal/flags"
+	"github.com/bitquery/protobuf-sql/encoding/protowire"
+	"github.com/bitquery/protobuf-sql/internal/encoding/messageset"
+	"github.com/bitquery/protobuf-sql/internal/errors"
+	"github.com/bitquery/protobuf-sql/internal/flags"
 )
 
 func sizeMessageSet(mi *MessageInfo, p pointer, opts marshalOptions) (size int) {

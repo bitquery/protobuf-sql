@@ -7,7 +7,7 @@
 
 package protoreflect
 
-import "google.golang.org/protobuf/internal/pragma"
+import "github.com/bitquery/protobuf-sql/internal/pragma"
 
 type valueType int
 

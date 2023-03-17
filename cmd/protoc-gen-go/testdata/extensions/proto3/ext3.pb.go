@@ -8,9 +8,9 @@
 package proto3
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
+	protoreflect "github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	protoimpl "github.com/bitquery/protobuf-sql/runtime/protoimpl"
+	descriptorpb "github.com/bitquery/protobuf-sql/types/descriptorpb"
 	reflect "reflect"
 	sync "sync"
 )

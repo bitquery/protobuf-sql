@@ -7,7 +7,7 @@ package json_test
 import (
 	"testing"
 
-	"google.golang.org/protobuf/internal/encoding/json"
+	"github.com/bitquery/protobuf-sql/internal/encoding/json"
 )
 
 func BenchmarkFloat(b *testing.B) {

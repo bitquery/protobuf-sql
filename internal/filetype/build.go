@@ -9,11 +9,11 @@ package filetype
 import (
 	"reflect"
 
-	"google.golang.org/protobuf/internal/descopts"
-	"google.golang.org/protobuf/internal/filedesc"
-	pimpl "google.golang.org/protobuf/internal/impl"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/reflect/protoregistry"
+	"github.com/bitquery/protobuf-sql/internal/descopts"
+	"github.com/bitquery/protobuf-sql/internal/filedesc"
+	pimpl "github.com/bitquery/protobuf-sql/internal/impl"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/reflect/protoregistry"
 )
 
 // Builder constructs type descriptors from a raw file descriptor

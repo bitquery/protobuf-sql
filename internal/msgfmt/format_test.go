@@ -11,19 +11,19 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/protobuf/internal/detrand"
-	"google.golang.org/protobuf/internal/msgfmt"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/testing/protocmp"
-	"google.golang.org/protobuf/testing/protopack"
+	"github.com/bitquery/protobuf-sql/internal/detrand"
+	"github.com/bitquery/protobuf-sql/internal/msgfmt"
+	"github.com/bitquery/protobuf-sql/proto"
+	"github.com/bitquery/protobuf-sql/testing/protocmp"
+	"github.com/bitquery/protobuf-sql/testing/protopack"
 
-	testpb "google.golang.org/protobuf/internal/testprotos/test"
-	textpb "google.golang.org/protobuf/internal/testprotos/textpb2"
-	dynpb "google.golang.org/protobuf/types/dynamicpb"
-	anypb "google.golang.org/protobuf/types/known/anypb"
-	durpb "google.golang.org/protobuf/types/known/durationpb"
-	tspb "google.golang.org/protobuf/types/known/timestamppb"
-	wpb "google.golang.org/protobuf/types/known/wrapperspb"
+	testpb "github.com/bitquery/protobuf-sql/internal/testprotos/test"
+	textpb "github.com/bitquery/protobuf-sql/internal/testprotos/textpb2"
+	dynpb "github.com/bitquery/protobuf-sql/types/dynamicpb"
+	anypb "github.com/bitquery/protobuf-sql/types/known/anypb"
+	durpb "github.com/bitquery/protobuf-sql/types/known/durationpb"
+	tspb "github.com/bitquery/protobuf-sql/types/known/timestamppb"
+	wpb "github.com/bitquery/protobuf-sql/types/known/wrapperspb"
 )
 
 func init() {

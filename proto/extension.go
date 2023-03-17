@@ -5,7 +5,7 @@
 package proto
 
 import (
-	"google.golang.org/protobuf/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
 )
 
 // HasExtension reports whether an extension field is populated.

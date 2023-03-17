@@ -7,12 +7,12 @@ package fieldmaskpb_test
 import (
 	"testing"
 
+	"github.com/bitquery/protobuf-sql/proto"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/protobuf/proto"
 
-	testpb "google.golang.org/protobuf/internal/testprotos/test"
-	fmpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	testpb "github.com/bitquery/protobuf-sql/internal/testprotos/test"
+	fmpb "github.com/bitquery/protobuf-sql/types/known/fieldmaskpb"
 )
 
 func TestAppend(t *testing.T) {

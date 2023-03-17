@@ -6,7 +6,7 @@ syntax = "proto2";
 
 package goproto.proto.messageset;
 
-option go_package = "google.golang.org/protobuf/internal/testprotos/messageset/msetextpb";
+option go_package = "github.com/bitquery/protobuf-sql/internal/testprotos/messageset/msetextpb";
 
 import "internal/testprotos/messageset/messagesetpb/message_set.proto";
 

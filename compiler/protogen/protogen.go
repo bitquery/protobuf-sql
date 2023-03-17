@@ -27,17 +27,17 @@ import (
 	"strconv"
 	"strings"
 
-	"google.golang.org/protobuf/encoding/prototext"
-	"google.golang.org/protobuf/internal/genid"
-	"google.golang.org/protobuf/internal/strs"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protodesc"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/reflect/protoregistry"
+	"github.com/bitquery/protobuf-sql/encoding/prototext"
+	"github.com/bitquery/protobuf-sql/internal/genid"
+	"github.com/bitquery/protobuf-sql/internal/strs"
+	"github.com/bitquery/protobuf-sql/proto"
+	"github.com/bitquery/protobuf-sql/reflect/protodesc"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/reflect/protoregistry"
 
-	"google.golang.org/protobuf/types/descriptorpb"
-	"google.golang.org/protobuf/types/dynamicpb"
-	"google.golang.org/protobuf/types/pluginpb"
+	"github.com/bitquery/protobuf-sql/types/descriptorpb"
+	"github.com/bitquery/protobuf-sql/types/dynamicpb"
+	"github.com/bitquery/protobuf-sql/types/pluginpb"
 )
 
 const goPackageDocURL = "https://protobuf.dev/reference/go/go-generated#package"
@@ -117,6 +117,10 @@ type Plugin struct {
 	genFiles       []*GeneratedFile
 	opts           Options
 	err            error
+
+	TemplatePath  string
+	DBName        string
+	MessageSuffix string
 }
 
 type Options struct {
@@ -192,6 +196,12 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 			default:
 				return nil, fmt.Errorf(`bad value for parameter %q: want "true" or "false"`, param)
 			}
+		case "template_path":
+			gen.TemplatePath = value
+		case "message_suffix":
+			gen.MessageSuffix = value
+		case "db":
+			gen.DBName = value
 		default:
 			if param[0] == 'M' {
 				impPath, pkgName := splitImportPathAndPackageName(value)
@@ -228,7 +238,7 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 	// .proto source file specifying the full import path of the Go package
 	// associated with this file.
 	//
-	//     option go_package = "google.golang.org/protobuf/types/known/anypb";
+	//     option go_package = "github.com/bitquery/protobuf-sql/types/known/anypb";
 	//
 	// Alternatively, build systems which want to exert full control over
 	// import paths may specify M<filename>=<import_path> flags.
@@ -245,14 +255,16 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 		}
 		switch {
 		case importPaths[filename] == "":
+			// IGNORE
+
 			// The import path must be specified one way or another.
-			return nil, fmt.Errorf(
-				"unable to determine Go import path for %q\n\n"+
-					"Please specify either:\n"+
-					"\t• a \"go_package\" option in the .proto source file, or\n"+
-					"\t• a \"M\" argument on the command line.\n\n"+
-					"See %v for more information.\n",
-				fdesc.GetName(), goPackageDocURL)
+			// return nil, fmt.Errorf(
+			// 	"unable to determine Go import path for %q\n\n"+
+			// 		"Please specify either:\n"+
+			// 		"\t• a \"go_package\" option in the .proto source file, or\n"+
+			// 		"\t• a \"M\" argument on the command line.\n\n"+
+			// 		"See %v for more information.\n",
+			// 	fdesc.GetName(), goPackageDocURL)
 		case !strings.Contains(string(importPaths[filename]), ".") &&
 			!strings.Contains(string(importPaths[filename]), "/"):
 			// Check that import paths contain at least a dot or slash to avoid
@@ -1201,7 +1213,7 @@ func newGoIdent(f *File, d protoreflect.Descriptor) GoIdent {
 }
 
 // A GoImportPath is the import path of a Go package.
-// For example: "google.golang.org/protobuf/compiler/protogen"
+// For example: "github.com/bitquery/protobuf-sql/compiler/protogen"
 type GoImportPath string
 
 func (p GoImportPath) String() string { return strconv.Quote(string(p)) }

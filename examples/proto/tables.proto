@@ -1,0 +1,59 @@
+syntax = "proto3";
+package evm_archive;
+
+import "blockchain/indexing.proto";
+import "solana/block_message.proto";
+import "solana/instructions_parsed_message.proto";
+
+message BlockMessage {
+  blockchain_messages.Indexing Indexing = 1;
+  solana_messages.BlockHeader Block = 2;
+}
+
+message RewardMessage {
+  blockchain_messages.Indexing Indexing = 1;
+  solana_messages.BlockHeader Block = 2;
+  solana_messages.Reward Reward = 5;
+}
+
+message TransactionMessage {
+  blockchain_messages.Indexing Indexing = 1;
+  solana_messages.BlockHeader Block = 2;
+  solana_messages.TransactionHeader Transaction = 3;
+  string Transaction_Signature = 4;
+  solana_messages.TransactionStatus TransactionStatus = 5;
+}
+
+message InstructionMessage {
+  blockchain_messages.Indexing Indexing = 1;
+  solana_messages.BlockHeader Block = 2;
+  solana_messages.TransactionHeader Transaction = 3;
+  string Transaction_Signature = 4;
+  solana_messages.TransactionStatus TransactionStatus = 5;
+  solana_messages.Program Instruction_Program = 6;
+  string Instruction_Data = 7;
+  string Instruction_ProgramIdlJson = 8;
+  string Instruction_ProgramName = 9;
+  string Instruction_ParsedDataJson = 10;
+  repeated string Instruction_AccountNames = 11;
+  //  uint64 CallerIndex = 7;
+  //  uint64 InnerIndex = 8;
+  //  uint64 NestingLevel = 9;
+}
+
+message BalanceUpdateMessage {
+  blockchain_messages.Indexing Indexing = 1;
+  solana_messages.BlockHeader Block = 2;
+  solana_messages.TransactionHeader Transaction = 3;
+  string Transaction_Signature = 4;
+  solana_messages.TransactionStatus TransactionStatus = 5;
+  solana_messages.Account BalanceUpdate_Account = 6;
+  uint64 BalanceUpdate_PreBalance = 7;
+  uint64 BalanceUpdate_PostBalance = 8;
+  uint64 BalanceUpdate_Value = 9;
+  solana_messages.TokenAccount TokenBalanceUpdate_Token = 10;
+  uint64 TokenBalanceUpdate_PreBalance = 11;
+  uint64 TokenBalanceUpdate_PostBalance = 12;
+  uint64 TokenBalanceUpdate_Value = 13;
+}
+

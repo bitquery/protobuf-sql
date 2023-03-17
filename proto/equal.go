@@ -7,7 +7,7 @@ package proto
 import (
 	"reflect"
 
-	"google.golang.org/protobuf/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
 )
 
 // Equal reports whether two messages are equal,

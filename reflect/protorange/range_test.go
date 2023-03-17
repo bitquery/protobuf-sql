@@ -8,17 +8,17 @@ import (
 	"testing"
 	"time"
 
+	"github.com/bitquery/protobuf-sql/proto"
+	"github.com/bitquery/protobuf-sql/reflect/protopath"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/reflect/protoregistry"
+	"github.com/bitquery/protobuf-sql/testing/protocmp"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protopath"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/reflect/protoregistry"
-	"google.golang.org/protobuf/testing/protocmp"
 
-	newspb "google.golang.org/protobuf/internal/testprotos/news"
-	anypb "google.golang.org/protobuf/types/known/anypb"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	newspb "github.com/bitquery/protobuf-sql/internal/testprotos/news"
+	anypb "github.com/bitquery/protobuf-sql/types/known/anypb"
+	timestamppb "github.com/bitquery/protobuf-sql/types/known/timestamppb"
 )
 
 func mustMarshal(m proto.Message) []byte {

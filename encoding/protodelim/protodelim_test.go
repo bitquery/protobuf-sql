@@ -11,11 +11,11 @@ import (
 	"io"
 	"testing"
 
+	"github.com/bitquery/protobuf-sql/encoding/protodelim"
+	"github.com/bitquery/protobuf-sql/encoding/protowire"
+	"github.com/bitquery/protobuf-sql/internal/testprotos/test3"
+	"github.com/bitquery/protobuf-sql/testing/protocmp"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/protobuf/encoding/protodelim"
-	"google.golang.org/protobuf/encoding/protowire"
-	"google.golang.org/protobuf/internal/testprotos/test3"
-	"google.golang.org/protobuf/testing/protocmp"
 )
 
 func TestRoundTrip(t *testing.T) {

@@ -10,7 +10,7 @@ import (
 	"reflect"
 	"testing"
 
-	"google.golang.org/protobuf/proto"
+	"github.com/bitquery/protobuf-sql/proto"
 )
 
 // The results of these microbenchmarks are unlikely to correspond well

@@ -28,7 +28,7 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/protobuf/internal/version"
+	"github.com/bitquery/protobuf-sql/internal/version"
 )
 
 var (

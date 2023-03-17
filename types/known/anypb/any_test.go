@@ -7,15 +7,15 @@ package anypb_test
 import (
 	"testing"
 
+	"github.com/bitquery/protobuf-sql/proto"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/testing/protocmp"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/testing/protocmp"
 
-	testpb "google.golang.org/protobuf/internal/testprotos/test"
-	apb "google.golang.org/protobuf/types/known/anypb"
-	epb "google.golang.org/protobuf/types/known/emptypb"
-	wpb "google.golang.org/protobuf/types/known/wrapperspb"
+	testpb "github.com/bitquery/protobuf-sql/internal/testprotos/test"
+	apb "github.com/bitquery/protobuf-sql/types/known/anypb"
+	epb "github.com/bitquery/protobuf-sql/types/known/emptypb"
+	wpb "github.com/bitquery/protobuf-sql/types/known/wrapperspb"
 )
 
 func mustMarshal(m proto.Message) []byte {

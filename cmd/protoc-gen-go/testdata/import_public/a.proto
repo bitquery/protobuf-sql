@@ -6,7 +6,7 @@ syntax = "proto2";
 
 package goproto.protoc.import_public;
 
-option go_package = "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/import_public";
+option go_package = "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata/import_public";
 
 import public "cmd/protoc-gen-go/testdata/import_public/sub/a.proto";  // Different Go package.
 import public "cmd/protoc-gen-go/testdata/import_public/b.proto";      // Same Go package.

@@ -4,7 +4,7 @@
 
 package genid
 
-import protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+import protoreflect "github.com/bitquery/protobuf-sql/reflect/protoreflect"
 
 // Generic field name and number for messages in wrappers.proto.
 const (

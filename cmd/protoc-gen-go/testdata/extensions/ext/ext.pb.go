@@ -8,10 +8,10 @@
 package ext
 
 import (
-	base "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/extensions/base"
-	extra "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/extensions/extra"
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	base "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata/extensions/base"
+	extra "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata/extensions/extra"
+	protoreflect "github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	protoimpl "github.com/bitquery/protobuf-sql/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 )

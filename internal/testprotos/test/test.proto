@@ -12,7 +12,7 @@ import public "internal/testprotos/test/test_public.proto";
 import weak "internal/testprotos/test/weak1/test_weak.proto";
 import weak "internal/testprotos/test/weak2/test_weak.proto";
 
-option go_package = "google.golang.org/protobuf/internal/testprotos/test";
+option go_package = "github.com/bitquery/protobuf-sql/internal/testprotos/test";
 
 message TestAllTypes {
   message NestedMessage {

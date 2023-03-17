@@ -16,15 +16,15 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"google.golang.org/protobuf/compiler/protogen"
-	"google.golang.org/protobuf/internal/encoding/tag"
-	"google.golang.org/protobuf/internal/genid"
-	"google.golang.org/protobuf/internal/version"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/runtime/protoimpl"
+	"github.com/bitquery/protobuf-sql/compiler/protogen"
+	"github.com/bitquery/protobuf-sql/internal/encoding/tag"
+	"github.com/bitquery/protobuf-sql/internal/genid"
+	"github.com/bitquery/protobuf-sql/internal/version"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/runtime/protoimpl"
 
-	"google.golang.org/protobuf/types/descriptorpb"
-	"google.golang.org/protobuf/types/pluginpb"
+	"github.com/bitquery/protobuf-sql/types/descriptorpb"
+	"github.com/bitquery/protobuf-sql/types/pluginpb"
 )
 
 // SupportedFeatures reports the set of supported protobuf language features.
@@ -51,12 +51,12 @@ const (
 // patched to support unique build environments that impose restrictions
 // on the dependencies of generated source code.
 var (
-	protoPackage         goImportPath = protogen.GoImportPath("google.golang.org/protobuf/proto")
-	protoifacePackage    goImportPath = protogen.GoImportPath("google.golang.org/protobuf/runtime/protoiface")
-	protoimplPackage     goImportPath = protogen.GoImportPath("google.golang.org/protobuf/runtime/protoimpl")
-	protojsonPackage     goImportPath = protogen.GoImportPath("google.golang.org/protobuf/encoding/protojson")
-	protoreflectPackage  goImportPath = protogen.GoImportPath("google.golang.org/protobuf/reflect/protoreflect")
-	protoregistryPackage goImportPath = protogen.GoImportPath("google.golang.org/protobuf/reflect/protoregistry")
+	protoPackage         goImportPath = protogen.GoImportPath("github.com/bitquery/protobuf-sql/proto")
+	protoifacePackage    goImportPath = protogen.GoImportPath("github.com/bitquery/protobuf-sql/runtime/protoiface")
+	protoimplPackage     goImportPath = protogen.GoImportPath("github.com/bitquery/protobuf-sql/runtime/protoimpl")
+	protojsonPackage     goImportPath = protogen.GoImportPath("github.com/bitquery/protobuf-sql/encoding/protojson")
+	protoreflectPackage  goImportPath = protogen.GoImportPath("github.com/bitquery/protobuf-sql/reflect/protoreflect")
+	protoregistryPackage goImportPath = protogen.GoImportPath("github.com/bitquery/protobuf-sql/reflect/protoregistry")
 )
 
 type goImportPath interface {

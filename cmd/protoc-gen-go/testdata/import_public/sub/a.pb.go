@@ -8,9 +8,9 @@
 package sub
 
 import (
-	sub2 "google.golang.org/protobuf/cmd/protoc-gen-go/testdata/import_public/sub2"
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	sub2 "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata/import_public/sub2"
+	protoreflect "github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	protoimpl "github.com/bitquery/protobuf-sql/runtime/protoimpl"
 	math "math"
 	reflect "reflect"
 	sync "sync"

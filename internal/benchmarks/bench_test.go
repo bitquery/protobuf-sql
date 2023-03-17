@@ -15,18 +15,18 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/protobuf/encoding/protojson"
-	"google.golang.org/protobuf/encoding/prototext"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/reflect/protoregistry"
+	"github.com/bitquery/protobuf-sql/encoding/protojson"
+	"github.com/bitquery/protobuf-sql/encoding/prototext"
+	"github.com/bitquery/protobuf-sql/proto"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/reflect/protoregistry"
 
-	benchpb "google.golang.org/protobuf/internal/testprotos/benchmarks"
-	_ "google.golang.org/protobuf/internal/testprotos/benchmarks/datasets/google_message1/proto2"
-	_ "google.golang.org/protobuf/internal/testprotos/benchmarks/datasets/google_message1/proto3"
-	_ "google.golang.org/protobuf/internal/testprotos/benchmarks/datasets/google_message2"
-	_ "google.golang.org/protobuf/internal/testprotos/benchmarks/datasets/google_message3"
-	_ "google.golang.org/protobuf/internal/testprotos/benchmarks/datasets/google_message4"
+	benchpb "github.com/bitquery/protobuf-sql/internal/testprotos/benchmarks"
+	_ "github.com/bitquery/protobuf-sql/internal/testprotos/benchmarks/datasets/google_message1/proto2"
+	_ "github.com/bitquery/protobuf-sql/internal/testprotos/benchmarks/datasets/google_message1/proto3"
+	_ "github.com/bitquery/protobuf-sql/internal/testprotos/benchmarks/datasets/google_message2"
+	_ "github.com/bitquery/protobuf-sql/internal/testprotos/benchmarks/datasets/google_message3"
+	_ "github.com/bitquery/protobuf-sql/internal/testprotos/benchmarks/datasets/google_message4"
 )
 
 func BenchmarkWire(b *testing.B) {

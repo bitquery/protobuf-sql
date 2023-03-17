@@ -7,9 +7,9 @@ package proto_test
 import (
 	"testing"
 
-	"google.golang.org/protobuf/proto"
+	"github.com/bitquery/protobuf-sql/proto"
 
-	testpb "google.golang.org/protobuf/internal/testprotos/test"
+	testpb "github.com/bitquery/protobuf-sql/internal/testprotos/test"
 )
 
 func TestReset(t *testing.T) {

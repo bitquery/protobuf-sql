@@ -12,15 +12,15 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protoreflect"
-	"google.golang.org/protobuf/runtime/protoimpl"
-	"google.golang.org/protobuf/testing/protocmp"
+	"github.com/bitquery/protobuf-sql/proto"
+	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/bitquery/protobuf-sql/runtime/protoimpl"
+	"github.com/bitquery/protobuf-sql/testing/protocmp"
 
-	legacy1pb "google.golang.org/protobuf/internal/testprotos/legacy/proto2_20160225_2fc053c5"
-	testpb "google.golang.org/protobuf/internal/testprotos/test"
-	test3pb "google.golang.org/protobuf/internal/testprotos/test3"
-	descpb "google.golang.org/protobuf/types/descriptorpb"
+	legacy1pb "github.com/bitquery/protobuf-sql/internal/testprotos/legacy/proto2_20160225_2fc053c5"
+	testpb "github.com/bitquery/protobuf-sql/internal/testprotos/test"
+	test3pb "github.com/bitquery/protobuf-sql/internal/testprotos/test3"
+	descpb "github.com/bitquery/protobuf-sql/types/descriptorpb"
 )
 
 func TestExtensionFuncs(t *testing.T) {
