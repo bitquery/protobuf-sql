@@ -10,19 +10,23 @@ import (
 	"strings"
 )
 
-const plainField = "%s %s"
-const arrayField = "%s array(%s)"
-
-var templ *template.Template
+const sqlField = "%s\t%s"
+const arrayType = "array(%s)"
+const columnWidth = 45
 
 type fileGenerator struct {
-	gen           *protogen.Plugin
-	message       *protogen.Message
-	gf            *protogen.GeneratedFile
-	fieldsBuilder strings.Builder
-	template      *template.Template
+	gen      *protogen.Plugin
+	message  *protogen.Message
+	gf       *protogen.GeneratedFile
+	fieldsSl []field
+	template *template.Template
 
 	logs *bytes.Buffer
+}
+
+type field struct {
+	Name string
+	Type string
 }
 
 type templateData struct {
@@ -61,10 +65,20 @@ func (g *fileGenerator) generateFile() {
 
 	g.generateFields(g.message, "")
 
+	var fieldsBuilder strings.Builder
+	for i, f := range g.fieldsSl {
+		paddedName := fmt.Sprintf("%-*s ", columnWidth, f.Name)
+		fRow := fmt.Sprintf(sqlField, paddedName, f.Type)
+		if i != len(g.fieldsSl)-1 {
+			fRow += ",\n\t"
+		}
+		fieldsBuilder.WriteString(fRow)
+	}
+
 	td := templateData{
 		Database: g.gen.DBName,
 		Table:    tableName(g.message.GoIdent.GoName, g.gen.MessageSuffix),
-		Fields:   g.fieldsBuilder.String(),
+		Fields:   fieldsBuilder.String(),
 	}
 
 	err := g.template.Execute(g.gf, td)
@@ -76,35 +90,25 @@ func (g *fileGenerator) generateFile() {
 
 func (g *fileGenerator) generateFields(message *protogen.Message, prefix string) {
 	for _, f := range message.Fields {
+		fieldName := prefix + f.GoName
+
 		if f.Desc.Kind() == protoreflect.MessageKind {
-			// if f.Desc.IsList() {
-			// 	g.gen.Error(fmt.Errorf("list of messages is not supported"))
-			// }
-			g.generateFields(f.Message, prefix+f.GoName+"_")
-			// fmt.Fprint(fg.logs, f.Message)
-			// fmt.Fprint(fg.logs, f.Extendee)
-			// fmt.Fprint(fg.logs, f.Parent)
-			// fmt.Fprint(fg.logs, f.Desc.Message())
-			// fmt.Println(fg.logs.String())
+			if f.Desc.IsList() {
+				g.gen.Error(fmt.Errorf("list of messages is not supported"))
+			}
+			g.generateFields(f.Message, fieldName+"_")
 
 			continue
 		}
 
-		if g.fieldsBuilder.Len() > 0 {
-			g.fieldsBuilder.WriteString(",\n\t")
-		}
-
+		fType := protoToClickhouse[f.Desc.Kind().String()]
 		if f.Desc.IsList() {
-			g.fieldsBuilder.WriteString(
-				fmt.Sprintf(arrayField, prefix+f.GoName, f.Desc.Kind().String()),
-			)
-			continue
+			fType = fmt.Sprintf(arrayType, fType)
 		}
 
-		g.fieldsBuilder.WriteString(
-			fmt.Sprintf(plainField, prefix+f.GoName, f.Desc.Kind().String()),
-		)
-
+		g.fieldsSl = append(g.fieldsSl, field{
+			fieldName, fType,
+		})
 	}
 }
 
