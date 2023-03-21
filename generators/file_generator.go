@@ -30,10 +30,11 @@ type field struct {
 }
 
 type templateData struct {
-	Database string
-	Table    string
-	Fields   string
-	Suffix   string
+	Database     string
+	Table        string
+	FieldsWTypes string
+	Fields       string
+	Suffix       string
 }
 
 func GenerateFileForMessage(gen *protogen.Plugin, m *protogen.Message) {
@@ -66,10 +67,19 @@ func (g *fileGenerator) generateFile() {
 
 	g.generateFields(g.message, "", 0)
 
-	var fieldsBuilder strings.Builder
+	var fieldsWTypesBuilder strings.Builder
 	for i, f := range g.fieldsSl {
 		paddedName := fmt.Sprintf("%-*s ", columnWidth, f.Name)
 		fRow := fmt.Sprintf(sqlField, paddedName, f.Type)
+		if i != len(g.fieldsSl)-1 {
+			fRow += ",\n\t"
+		}
+		fieldsWTypesBuilder.WriteString(fRow)
+	}
+
+	var fieldsBuilder strings.Builder
+	for i, f := range g.fieldsSl {
+		fRow := f.Name
 		if i != len(g.fieldsSl)-1 {
 			fRow += ",\n\t"
 		}
@@ -77,10 +87,11 @@ func (g *fileGenerator) generateFile() {
 	}
 
 	td := templateData{
-		Database: g.gen.DBName,
-		Table:    tableName(g.message.GoIdent.GoName, g.gen.MessageSuffix),
-		Fields:   fieldsBuilder.String(),
-		Suffix:   g.gen.TemplateSuffix,
+		Database:     g.gen.DBName,
+		Table:        tableName(g.message.GoIdent.GoName, g.gen.MessageSuffix),
+		FieldsWTypes: fieldsWTypesBuilder.String(),
+		Fields:       fieldsBuilder.String(),
+		Suffix:       g.gen.TemplateSuffix,
 	}
 
 	err := g.template.Execute(g.gf, td)
