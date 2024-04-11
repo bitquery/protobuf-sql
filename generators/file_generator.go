@@ -129,6 +129,10 @@ func (g *fileGenerator) generateFields(message *protogen.Message, prefix string,
 		}
 
 		if _, ok := g.fieldsToIgnoreMap[fieldName]; !ok {
+			// remove trailing '_' if exists
+			if len(fieldName) > 0 && fieldName[len(fieldName)-1] == '_' {
+				fieldName = fieldName[:len(fieldName)-1]
+			}
 			g.fieldsSl = append(g.fieldsSl, field{
 				fieldName, fType,
 			})

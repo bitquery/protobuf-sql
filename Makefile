@@ -1,5 +1,5 @@
 compile:
-	go install github.com/bitquery/protobuf-sql/cmd/protoc-gen-sql@version-update && \
+	go install github.com/bitquery/protobuf-sql/cmd/protoc-gen-sql@test/test && \
 	rm -rf ./examples/sql && \
 	mkdir -p ./examples/sql && \
 	protoc \
