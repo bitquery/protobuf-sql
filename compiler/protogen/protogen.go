@@ -125,6 +125,7 @@ type Plugin struct {
 	DBName         string
 	MessageSuffix  string
 	TemplateSuffix string
+	IgnoreFields   string
 }
 
 type Options struct {
@@ -204,6 +205,8 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 			gen.TemplatePath = value
 		case "template_suffix":
 			gen.TemplateSuffix = value
+		case "ignore_fields":
+			gen.IgnoreFields = value
 		case "message_suffix":
 			gen.MessageSuffix = value
 		case "db":

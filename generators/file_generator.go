@@ -15,11 +15,12 @@ const arrayTypeTemplate = arrayType + "(%s)"
 const columnWidth = 45
 
 type fileGenerator struct {
-	gen      *protogen.Plugin
-	message  *protogen.Message
-	gf       *protogen.GeneratedFile
-	fieldsSl []field
-	template *template.Template
+	gen               *protogen.Plugin
+	message           *protogen.Message
+	gf                *protogen.GeneratedFile
+	fieldsToIgnoreMap map[string]struct{}
+	fieldsSl          []field
+	template          *template.Template
 
 	logs *bytes.Buffer
 }
@@ -35,6 +36,7 @@ type templateData struct {
 	FieldsWTypes string
 	Fields       string
 	Suffix       string
+	IgnoreFields string
 }
 
 func GenerateFileForMessage(gen *protogen.Plugin, m *protogen.Message) {
@@ -50,8 +52,9 @@ func GenerateFileForMessage(gen *protogen.Plugin, m *protogen.Message) {
 	}
 
 	fg.setupTemplate()
-
+	fg.parseIgnoreFields()
 	fg.generateFile()
+	//log.Fatal(fg.logs.String())
 }
 
 func (g *fileGenerator) FilterMessage() bool {
@@ -125,15 +128,30 @@ func (g *fileGenerator) generateFields(message *protogen.Message, prefix string,
 			fType = fmt.Sprintf(arrayTypeTemplate, fType)
 		}
 
-		g.fieldsSl = append(g.fieldsSl, field{
-			fieldName, fType,
-		})
+		if _, ok := g.fieldsToIgnoreMap[fieldName]; !ok {
+			g.fieldsSl = append(g.fieldsSl, field{
+				fieldName, fType,
+			})
+		}
 	}
 }
 
 func (g *fileGenerator) setupTemplate() {
 	if g.template == nil {
 		g.template = template.Must(template.ParseFiles(g.gen.TemplatePath))
+	}
+}
+
+func (g *fileGenerator) parseIgnoreFields() {
+	if g.gen.IgnoreFields != "" {
+		g.logs.WriteString(fmt.Sprintf("Ignoring fields: %s\n", g.gen.IgnoreFields))
+
+		fieldsToIgnore := strings.Split(g.gen.IgnoreFields, ";")
+		g.fieldsToIgnoreMap = make(map[string]struct{}, len(fieldsToIgnore))
+		for _, f := range fieldsToIgnore {
+			g.logs.WriteString(fmt.Sprintf("Ignoring field: %s\n", f))
+			g.fieldsToIgnoreMap[f] = struct{}{}
+		}
 	}
 }
 
