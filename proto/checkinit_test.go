@@ -15,6 +15,7 @@ import (
 
 	testpb "github.com/bitquery/protobuf-sql/internal/testprotos/test"
 	weakpb "github.com/bitquery/protobuf-sql/internal/testprotos/test/weak1"
+	testeditionspb "github.com/bitquery/protobuf-sql/internal/testprotos/testeditions"
 )
 
 func TestCheckInitializedErrors(t *testing.T) {
@@ -46,6 +47,29 @@ func TestCheckInitializedErrors(t *testing.T) {
 			},
 		},
 		want: `goproto.proto.test.TestRequired.required_field`,
+	}, {
+		m:    &testeditionspb.TestRequired{},
+		want: `goproto.proto.testeditions.TestRequired.required_field`,
+	}, {
+		m: &testeditionspb.TestRequiredForeign{
+			OptionalMessage: &testeditionspb.TestRequired{},
+		},
+		want: `goproto.proto.testeditions.TestRequired.required_field`,
+	}, {
+		m: &testeditionspb.TestRequiredForeign{
+			RepeatedMessage: []*testeditionspb.TestRequired{
+				{RequiredField: proto.Int32(1)},
+				{},
+			},
+		},
+		want: `goproto.proto.testeditions.TestRequired.required_field`,
+	}, {
+		m: &testeditionspb.TestRequiredForeign{
+			MapMessage: map[int32]*testeditionspb.TestRequired{
+				1: {},
+			},
+		},
+		want: `goproto.proto.testeditions.TestRequired.required_field`,
 	}, {
 		m:    &testpb.TestWeak{},
 		want: `<nil>`,

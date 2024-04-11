@@ -26,5 +26,6 @@ import (
 	_ "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata/nopackage"
 	_ "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata/proto2"
 	_ "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata/proto3"
+	_ "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata/protoeditions"
 	_ "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata/retention"
 )

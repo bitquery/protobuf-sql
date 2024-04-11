@@ -14,6 +14,7 @@ import (
 	"github.com/bitquery/protobuf-sql/proto"
 	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
 	"github.com/bitquery/protobuf-sql/testing/protopack"
+	"github.com/bitquery/protobuf-sql/types/known/durationpb"
 
 	"github.com/bitquery/protobuf-sql/internal/errors"
 	testpb "github.com/bitquery/protobuf-sql/internal/testprotos/test"
@@ -154,4 +155,21 @@ func extend(desc protoreflect.ExtensionType, value interface{}) buildOpt {
 	return func(m proto.Message) {
 		proto.SetExtension(m, desc, value)
 	}
+}
+
+// This example illustrates how to unmarshal (decode) wire format encoding into
+// a Protobuf message.
+func ExampleUnmarshal() {
+	// This is the wire format encoding produced by the Marshal example.
+	// Typically you would read from the network, from disk, etc.
+	b := []byte{0x10, 0x7d}
+
+	var dur durationpb.Duration
+	if err := proto.Unmarshal(b, &dur); err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Protobuf wire format decoded to duration %v\n", dur.AsDuration())
+
+	// Output: Protobuf wire format decoded to duration 125ns
 }

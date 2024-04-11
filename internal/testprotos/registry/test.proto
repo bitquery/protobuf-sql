@@ -6,6 +6,7 @@
 syntax = "proto2";
 
 package testprotos;
+
 option go_package = "github.com/bitquery/protobuf-sql/internal/testprotos/registry";
 
 message Message1 {

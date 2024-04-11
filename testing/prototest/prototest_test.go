@@ -20,15 +20,19 @@ import (
 	_ "github.com/bitquery/protobuf-sql/internal/testprotos/test/weak1"
 	_ "github.com/bitquery/protobuf-sql/internal/testprotos/test/weak2"
 	test3pb "github.com/bitquery/protobuf-sql/internal/testprotos/test3"
+	testeditionspb "github.com/bitquery/protobuf-sql/internal/testprotos/testeditions"
 )
 
 func Test(t *testing.T) {
 	ms := []proto.Message{
 		(*testpb.TestAllTypes)(nil),
 		(*test3pb.TestAllTypes)(nil),
+		(*testeditionspb.TestAllTypes)(nil),
 		(*testpb.TestRequired)(nil),
+		(*testeditionspb.TestRequired)(nil),
 		(*irregularpb.Message)(nil),
 		(*testpb.TestAllExtensions)(nil),
+		(*testeditionspb.TestAllExtensions)(nil),
 		(*legacypb.Legacy)(nil),
 		protoimpl.X.MessageOf((*legacy1pb.Message)(nil)).Interface(),
 	}

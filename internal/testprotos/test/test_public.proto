@@ -8,5 +8,4 @@ package goproto.proto.test;
 
 option go_package = "github.com/bitquery/protobuf-sql/internal/testprotos/test";
 
-message PublicImportMessage {
-}
+message PublicImportMessage {}

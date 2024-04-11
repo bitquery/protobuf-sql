@@ -11,10 +11,12 @@ option go_package = "github.com/bitquery/protobuf-sql/cmd/protoc-gen-go/testdata
 
 message DeprecatedMessage {
   option deprecated = true;
-  string deprecated_field = 1 [deprecated=true];
+
+  string deprecated_field = 1 [deprecated = true];
 }
 
 enum DeprecatedEnum {
   option deprecated = true;
-  DEPRECATED = 0 [deprecated=true];
+
+  DEPRECATED = 0 [deprecated = true];
 }

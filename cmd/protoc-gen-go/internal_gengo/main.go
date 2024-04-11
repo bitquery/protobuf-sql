@@ -17,7 +17,9 @@ import (
 	"unicode/utf8"
 
 	"github.com/bitquery/protobuf-sql/compiler/protogen"
+	"github.com/bitquery/protobuf-sql/internal/editionssupport"
 	"github.com/bitquery/protobuf-sql/internal/encoding/tag"
+	"github.com/bitquery/protobuf-sql/internal/filedesc"
 	"github.com/bitquery/protobuf-sql/internal/genid"
 	"github.com/bitquery/protobuf-sql/internal/version"
 	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
@@ -28,7 +30,10 @@ import (
 )
 
 // SupportedFeatures reports the set of supported protobuf language features.
-var SupportedFeatures = uint64(pluginpb.CodeGeneratorResponse_FEATURE_PROTO3_OPTIONAL)
+var SupportedFeatures = uint64(pluginpb.CodeGeneratorResponse_FEATURE_PROTO3_OPTIONAL | pluginpb.CodeGeneratorResponse_FEATURE_SUPPORTS_EDITIONS)
+
+var SupportedEditionsMinimum = editionssupport.Minimum
+var SupportedEditionsMaximum = editionssupport.Maximum
 
 // GenerateVersionMarkers specifies whether to generate version markers.
 var GenerateVersionMarkers = true
@@ -288,7 +293,11 @@ func genEnum(g *protogen.GeneratedFile, f *fileInfo, e *enumInfo) {
 	genEnumReflectMethods(g, f, e)
 
 	// UnmarshalJSON method.
-	if e.genJSONMethod && e.Desc.Syntax() == protoreflect.Proto2 {
+	needsUnmarshalJSONMethod := false
+	if fde, ok := e.Desc.(*filedesc.Enum); ok {
+		needsUnmarshalJSONMethod = fde.L1.EditionFeatures.GenerateLegacyUnmarshalJSON
+	}
+	if e.genJSONMethod && needsUnmarshalJSONMethod {
 		g.P("// Deprecated: Do not use.")
 		g.P("func (x *", e.GoIdent, ") UnmarshalJSON(b []byte) error {")
 		g.P("num, err := ", protoimplPackage.Ident("X"), ".UnmarshalJSONEnum(x.Descriptor(), b)")
@@ -614,7 +623,10 @@ func genMessageSetterMethods(g *protogen.GeneratedFile, f *fileInfo, m *messageI
 
 		genNoInterfacePragma(g, m.isTracked)
 
-		g.Annotate(m.GoIdent.GoName+".Set"+field.GoName, field.Location)
+		g.AnnotateSymbol(m.GoIdent.GoName+".Set"+field.GoName, protogen.Annotation{
+			Location: field.Location,
+			Semantic: descriptorpb.GeneratedCodeInfo_Annotation_SET.Enum(),
+		})
 		leadingComments := appendDeprecationSuffix("",
 			field.Desc.ParentFile(),
 			field.Desc.Options().(*descriptorpb.FieldOptions).GetDeprecated())

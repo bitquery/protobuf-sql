@@ -11,5 +11,5 @@ import "internal/testprotos/test/test.proto";
 option go_package = "github.com/bitquery/protobuf-sql/internal/testprotos/test";
 
 extend TestAllExtensions {
-  optional int32    foreign_int32_extension =  2000;
+  optional int32 foreign_int32_extension = 2000;
 }
