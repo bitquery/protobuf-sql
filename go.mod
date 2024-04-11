@@ -8,4 +8,4 @@ require (
 	github.com/stoewer/go-strcase v1.2.1
 )
 
-require golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 // indirect
+require google.golang.org/protobuf v1.26.0 // indirect

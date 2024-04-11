@@ -1,5 +1,4 @@
 compile:
-
 	go install github.com/bitquery/protobuf-sql/cmd/protoc-gen-sql && \
 	rm -rf ./examples/sql && \
 	mkdir -p ./examples/sql && \
