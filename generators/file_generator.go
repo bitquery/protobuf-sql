@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/bitquery/protobuf-sql/compiler/protogen"
 	"github.com/bitquery/protobuf-sql/reflect/protoreflect"
+	"github.com/gertd/go-pluralize"
 	"github.com/stoewer/go-strcase"
 	"html/template"
 	"strings"
@@ -165,5 +166,6 @@ func fileName(messageName, suffix string) string {
 }
 
 func tableName(messageName, suffix string) string {
-	return strcase.SnakeCase(strings.TrimSuffix(messageName, suffix)) + "s"
+	singular := strcase.SnakeCase(strings.TrimSuffix(messageName, suffix))
+	return pluralize.NewClient().Plural(singular)
 }
